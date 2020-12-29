@@ -36,11 +36,21 @@ package() {
     local desc="Pololu Motor Control API"
     local url="https://api.github.com/repos/hansonrobotics/$reponame/releases"
 
+	ROS_PYTHON_VERSION=${ROS_PYTHON_VERSION:-3}
+	if [[ $ROS_PYTHON_VERSION == 3 ]]; then
+		PYTHON_BIN=python3
+		PYTHON_PKG_PREFIX=$HR_PREFIX/py3env/lib/python3.8/dist-packages
+	else
+		PYTHON_BIN=python
+		PYTHON_PKG_PREFIX=$HR_PREFIX/py3env/lib/python2.7/dist-packages
+	fi
+
     fpm -s python -t deb -n "${name}" -v "${version#v}" --vendor "${VENDOR}" \
         --url "${url}" --description "${desc}" ${ms} --force \
         --deb-no-default-config-files \
         -p $BASEDIR/${name}_VERSION_ARCH.deb \
         -d "python-serial" \
+        --python-bin $PYTHON_BIN \
         --python-install-bin $HR_PREFIX/bin \
         --python-install-lib $PYTHON_PKG_PREFIX \
         $BASEDIR/src/$reponame/setup.py
