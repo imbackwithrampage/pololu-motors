@@ -40,10 +40,9 @@ package() {
         --url "${url}" --description "${desc}" ${ms} --force \
         --deb-no-default-config-files \
         -p $BASEDIR/${name}_VERSION_ARCH.deb \
-        --python-bin $HR_PREFIX/py2env/bin/python \
+        -d "python-serial" \
         --python-install-bin $HR_PREFIX/bin \
         --python-install-lib $PYTHON_PKG_PREFIX \
-        -d "python-serial" \
         $BASEDIR/src/$reponame/setup.py
 
     rm -r $BASEDIR/src
