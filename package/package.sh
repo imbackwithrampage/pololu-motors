@@ -42,7 +42,7 @@ package() {
 		PYTHON_PKG_PREFIX=$HR_PREFIX/py3env/lib/python3.8/dist-packages
 	else
 		PYTHON_BIN=python
-		PYTHON_PKG_PREFIX=$HR_PREFIX/py3env/lib/python2.7/dist-packages
+		PYTHON_PKG_PREFIX=$HR_PREFIX/py2env/lib/python2.7/dist-packages
 	fi
 
     fpm -s python -t deb -n "${name}" -v "${version#v}" --vendor "${VENDOR}" \
